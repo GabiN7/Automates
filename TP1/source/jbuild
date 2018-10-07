@@ -1,0 +1,6 @@
+(jbuild_version 1)
+
+(ocamllex (lexerJava))
+
+(executable
+ ((name mainJava)))

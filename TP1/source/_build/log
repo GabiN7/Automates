@@ -1,0 +1,11 @@
+# jbuilder build mainJava.exe
+# OCAMLPARAM: unset
+$ /usr/bin/nproc > /tmp/dune955eaa.output
+$ /opt/opam/4.06.0/bin/ocamlc.opt -config > /tmp/duneed8686.output
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamllex.opt -q -o lexerJava.ml lexerJava.mll)
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamldep.opt -modules -impl lexerJava.ml) > _build/default/.mainJava.eobjs/lexerJava.ml.d
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlc.opt -w -40 -g -bin-annot -I .mainJava.eobjs -no-alias-deps -o .mainJava.eobjs/lexerJava.cmo -c -impl lexerJava.ml)
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlc.opt -w -40 -g -bin-annot -I .mainJava.eobjs -no-alias-deps -o .mainJava.eobjs/mainJava.cmo -c -impl mainJava.ml)
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlopt.opt -w -40 -g -I .mainJava.eobjs -intf-suffix .ml -no-alias-deps -o .mainJava.eobjs/lexerJava.cmx -c -impl lexerJava.ml)
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlopt.opt -w -40 -g -I .mainJava.eobjs -intf-suffix .ml -no-alias-deps -o .mainJava.eobjs/mainJava.cmx -c -impl mainJava.ml)
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlopt.opt -w -40 -g -o mainJava.exe .mainJava.eobjs/tokenJava.cmx .mainJava.eobjs/lexerJava.cmx .mainJava.eobjs/mainJava.cmx)
