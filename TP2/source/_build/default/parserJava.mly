@@ -88,25 +88,12 @@ variable : typeStruct IDENT PTVIRG { (print_endline "variable : typeStruct IDENT
 
 /* A FAIRE : Completer pour decrire une liste d'instructions eventuellement vide */
 instructions : instruction { (print_endline "instructions : instruction") }
- 
 
 /* A FAIRE : Completer pour ajouter les autres formes d'instructions */
                instruction : expression PTVIRG { (print_endline "instruction : expression PTVIRG") }
                              | RETOUR expression PTVIRG  { (print_endline "instruction : RETURN expression PTVIRG") }
-                             | SI PAROUV expression PARFER corps  { (print_endline "instruction : SI PAROUV expression PARFER corps") }
-                             | SI PAROUV expression PARFER corps SINON corps { (print_endline "instruction : SI PAROUV expression PARFER corps SINON corps") }
-                             | TANTQUE PAROUV expression PARFER corps { (print_endline "instruction : TANTQUE PAROUV expression PARFER corps") }
-                 
 
 /* A FAIRE : Completer pour ajouter les autres formes d'expressions */
 expression : ENTIER { (print_endline "expression : ENTIER") }
-            | FLOTTANT { (print_endline "expression : FLOTTANT") }
-            | CHAR { (print_endline "expression : CHAR") }
-            | BOOLEEN { (print_endline "expression : BOOLEEN") }
-            | VIDE { (print_endline "expression : VIDE") }
-            | NOUVEAU IDENT aux { (print_endline "expression : NOUVEAU IDENT aux") }
-            | IDENT
-            | PAROUV IDENT PARFER
 
-aux : PAROUV PARFER | CROOUV expression CROFER
 %%

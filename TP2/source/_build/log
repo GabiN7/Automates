@@ -1,0 +1,7 @@
+# jbuilder build mainJava.exe
+# OCAMLPARAM: unset
+$ /usr/bin/nproc > /tmp/dune7ff59b.output
+$ /opt/opam/4.06.0/bin/ocamlc.opt -config > /tmp/dune16e575.output
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamllex.opt -q -o lexerJava.ml lexerJava.mll)
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamldep.opt -modules -impl lexerJava.ml) > _build/default/.mainJava.eobjs/lexerJava.ml.d
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlc.opt -w -40 -g -bin-annot -I .mainJava.eobjs -no-alias-deps -o .mainJava.eobjs/lexerJava.cmo -c -impl lexerJava.ml)
