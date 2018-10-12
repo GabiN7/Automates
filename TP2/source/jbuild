@@ -1,0 +1,9 @@
+(jbuild_version 1)
+
+(ocamllex (lexerJava))
+
+(menhir
+ ((modules (parserJava))))
+
+(executable
+ ((name mainJava)))
