@@ -3,7 +3,8 @@
 (* Partie recopiee dans le fichier CaML genere. *)
 (* Ouverture de modules exploites dans les actions *)
 (* Declarations de types, de constantes, de fonctions, d'exceptions exploites dans les actions *)
-
+let nbInstructions = ref 0;;
+let nbVariables = ref 0;;
 %}
 
 /* Declaration des unites lexicales et de leur type si une valeur particuliere leur est associee */
@@ -84,20 +85,21 @@ bloc : ACCOUV variables instructions ACCFER { (print_endline "bloc : ACCOUV vari
 variables : /* Lambda, mot vide */ { (print_endline "variables : /* Lambda, mot vide */") }
           | variable variables { (print_endline "variables : variable variables") }
 
-variable : typeStruct IDENT PTVIRG { (print_endline "variable : typeStruct IDENT PTVIRG") }
+variable : typeStruct IDENT PTVIRG { (print_endline "variable : typeStruct IDENT PTVIRG") ; nbVariables:=(!nbVariables)+1; print_int (!nbVariables)}
 
 /* A FAIRE : Completer pour decrire une liste d'instructions eventuellement vide */
-instructions : instruction { (print_endline "instructions : instruction") }
+instructions :  { (print_endline "instructions : mot vide") }
+                | instruction instructions{ (print_endline "instructions : instruction") ; nbInstructions:=(!nbInstructions)+1;print_int (!nbInstructions)}
  
 
 /* A FAIRE : Completer pour ajouter les autres formes d'instructions */
-               instruction : expression PTVIRG { (print_endline "instruction : expression PTVIRG") }
-                             | RETOUR expression PTVIRG  { (print_endline "instruction : RETURN expression PTVIRG") }
-                             | SI PAROUV expression PARFER corps  { (print_endline "instruction : SI PAROUV expression PARFER corps") }
-                             | SI PAROUV expression PARFER corps SINON corps { (print_endline "instruction : SI PAROUV expression PARFER corps SINON corps") }
-                             | TANTQUE PAROUV expression PARFER corps { (print_endline "instruction : TANTQUE PAROUV expression PARFER corps") }
+instruction : expression PTVIRG { (print_endline "instruction : expression PTVIRG") }
+         | RETOUR expression PTVIRG  { (print_endline "instruction : RETURN expression PTVIRG") }
+         | SI PAROUV expression PARFER corps  { (print_endline "instruction : SI PAROUV expression PARFER corps") }
+         | SI PAROUV expression PARFER corps SINON corps { (print_endline "instruction : SI PAROUV expression PARFER corps SINON corps") }
+         | TANTQUE PAROUV expression PARFER corps { (print_endline "instruction : TANTQUE PAROUV expression PARFER corps") }
                  
-
+corps : ACCOUV ACCFER { (print_endline "corps : CROOUV CROFER") } /*a completer*/
 /* A FAIRE : Completer pour ajouter les autres formes d'expressions */
 expression : ENTIER { (print_endline "expression : ENTIER") }
             | FLOTTANT { (print_endline "expression : FLOTTANT") }
@@ -105,8 +107,41 @@ expression : ENTIER { (print_endline "expression : ENTIER") }
             | BOOLEEN { (print_endline "expression : BOOLEEN") }
             | VIDE { (print_endline "expression : VIDE") }
             | NOUVEAU IDENT aux { (print_endline "expression : NOUVEAU IDENT aux") }
-            | IDENT
-            | PAROUV IDENT PARFER
+            | IDENT { (print_endline "expression :  IDENT ")}
+            | PAROUV IDENT PARFER { (print_endline "expression : PAROUV IDENT PARFER")}
+            | binaire { (print_endline "expression : binaire")}
 
-aux : PAROUV PARFER | CROOUV expression CROFER
+aux : PAROUV PARFER { (print_endline "expression : PAROUV PARFER")}
+   | CROOUV expression CROFER  { (print_endline "expression : PAROUV IDENT PARFER")}
+
+
+binaire : ASSIGN { (print_endline "binaire : ASSIGN")}
+        | OPPT { (print_endline "binaire : OPPT")}
+        | OPPLUS { (print_endline "binaire : OPPLUS")}
+        | OPMOINS { (print_endline "binaire : OPMOINS")}
+        | OPMULT { (print_endline "binaire : OPMULT")}
+        | OPDIV { (print_endline "binaire : OPDIV")}
+        | OPMOD { (print_endline "binaire : OPMOD")}
+        | OPOU { (print_endline "binaire : OPOU")}
+        | OPET { (print_endline "binaire : OPET")}
+        | OPEG { (print_endline "binaire : OPEG")}
+        | OPNONEG { (print_endline "binaire : OPNONEG")}
+        | OPINF { (print_endline "binaire : OPINF")}
+        | OPSUP { (print_endline "binaire : OPSUP")}
+        | OPINFEG { (print_endline "binaire : OPSUP")}
+        | OPSUPEG { (print_endline "binaire : OPSUPEG")}
+
+unaire : PAROUV typeStruct PARFER { (print_endline "unaire : PAROUV type PARFER")}
+        | OPPLUS { (print_endline "unaire : OPPLUS")}
+        | OPMOINS { (print_endline "unaire : OPMOINS")}
+        | OPNON { (print_endline "unaire : OPNON")}
+
+suffixe : PAROUV PARFER { (print_endline "suffixe : PAROUV PARFER ")}
+        |PAROUV expression aux2 PARFER { (print_endline "suffixe : PAROUV expression aux2 PARFER ")}
+        |CROOUV expression CROFER { (print_endline "suffixe : CROOUV expression CROFER ")}
+
+aux2 : VIRG expression aux2 { (print_endline "aux2 : VIRG expression aux2  ")}
+    |  { (print_endline "aux2 : mot vide ")}
+
+corps : CROOUV variables instructions CROFER
 %%

@@ -1,7 +1,55 @@
 # jbuilder build mainJava.exe
 # OCAMLPARAM: unset
-$ /usr/bin/nproc > /tmp/dune7ff59b.output
-$ /opt/opam/4.06.0/bin/ocamlc.opt -config > /tmp/dune16e575.output
-$ (cd _build/default && /opt/opam/4.06.0/bin/ocamllex.opt -q -o lexerJava.ml lexerJava.mll)
-$ (cd _build/default && /opt/opam/4.06.0/bin/ocamldep.opt -modules -impl lexerJava.ml) > _build/default/.mainJava.eobjs/lexerJava.ml.d
-$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlc.opt -w -40 -g -bin-annot -I .mainJava.eobjs -no-alias-deps -o .mainJava.eobjs/lexerJava.cmo -c -impl lexerJava.ml)
+$ /usr/bin/nproc > /tmp/duneeb40ea.output
+$ /opt/opam/4.06.0/bin/ocamlc.opt -config > /tmp/dunedcd223.output
+$ (cd _build/default && /opt/opam/4.06.0/bin/menhir parserJava.mly --base parserJava)
+> File "parserJava.mly", line 22, characters 14-23:
+> Warning: the token CARACTERE is unused.
+> File "parserJava.mly", line 23, characters 16-22:
+> Warning: the token CHAINE is unused.
+> File "parserJava.mly", line 12, characters 7-13:
+> Warning: the token IMPORT is unused.
+> File "parserJava.mly", line 116, characters 0-7:
+> Warning: symbol binaire is unreachable from any of the start symbol(s).
+> File "parserJava.mly", line 132, characters 0-6:
+> Warning: symbol unaire is unreachable from any of the start symbol(s).
+> File "parserJava.mly", line 38, characters 0-6:
+> Warning: the precedence level assigned to ASSIGN is never useful.
+> File "parserJava.mly", line 45, characters 0-5:
+> Warning: the precedence level assigned to CROOUV is never useful.
+> File "parserJava.mly", line 43, characters 0-5:
+> Warning: the precedence level assigned to OPDIV is never useful.
+> File "parserJava.mly", line 40, characters 0-9:
+> Warning: the precedence level assigned to OPEG is never useful.
+> File "parserJava.mly", line 43, characters 0-5:
+> Warning: the precedence level assigned to OPET is never useful.
+> File "parserJava.mly", line 40, characters 0-9:
+> Warning: the precedence level assigned to OPINF is never useful.
+> File "parserJava.mly", line 40, characters 0-9:
+> Warning: the precedence level assigned to OPINFEG is never useful.
+> File "parserJava.mly", line 43, characters 0-5:
+> Warning: the precedence level assigned to OPMOD is never useful.
+> File "parserJava.mly", line 42, characters 0-5:
+> Warning: the precedence level assigned to OPMOINS is never useful.
+> File "parserJava.mly", line 43, characters 0-5:
+> Warning: the precedence level assigned to OPMULT is never useful.
+> File "parserJava.mly", line 44, characters 0-6:
+> Warning: the precedence level assigned to OPNON is never useful.
+> File "parserJava.mly", line 40, characters 0-9:
+> Warning: the precedence level assigned to OPNONEG is never useful.
+> File "parserJava.mly", line 42, characters 0-5:
+> Warning: the precedence level assigned to OPOU is never useful.
+> File "parserJava.mly", line 42, characters 0-5:
+> Warning: the precedence level assigned to OPPLUS is never useful.
+> File "parserJava.mly", line 45, characters 0-5:
+> Warning: the precedence level assigned to OPPT is never useful.
+> File "parserJava.mly", line 40, characters 0-9:
+> Warning: the precedence level assigned to OPSUP is never useful.
+> File "parserJava.mly", line 40, characters 0-9:
+> Warning: the precedence level assigned to OPSUPEG is never useful.
+> File "parserJava.mly", line 45, characters 0-5:
+> Warning: the precedence level assigned to PAROUV is never useful.
+> Warning: 2 states have shift/reduce conflicts.
+> Warning: 2 shift/reduce conflicts were arbitrarily resolved.
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamldep.opt -modules -impl parserJava.ml) > _build/default/.mainJava.eobjs/parserJava.ml.d
+$ (cd _build/default && /opt/opam/4.06.0/bin/ocamlopt.opt -w -40 -g -I .mainJava.eobjs -intf-suffix .ml -no-alias-deps -o .mainJava.eobjs/parserJava.cmx -c -impl parserJava.ml)
